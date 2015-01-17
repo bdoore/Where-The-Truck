@@ -16,6 +16,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
+        Parse.setApplicationId("f2ZnCQ10fLYsU4tt4KKzuKsc84f8rjHcF47fbSub", clientKey: "G4qXHtgf6fyIjXP16h8J0dfB9SfjRxqdZ0IlBvJF")
+        
+//        var userNotificationTypes : UIUserNotificationType = (UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound)
+//        
+//        var settings : UIUserNotificationSettings = UIUserNotificationSettings(forTypes: userNotificationTypes, categories: nil)
+//        
+//        application.registerUserNotificationSettings(settings)
+//        application.registerForRemoteNotifications()
+        
+        
+//        UIUserNotificationType userNotificationTypes = (UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound)
+        
+//        UIUserNotificationSettings settings = UIUserNotificationSettings(forTypes: userNotificationTypes, categories: nil)
+        
+        
+        
+//        var testObject: PFObject = PFObject(className: "TestObject")
+//        testObject["Truck1"] = "Position"
+//        
+//        testObject.saveEventually()
+//        testObject.save()
+        
+        
         return true
     }
 
@@ -39,6 +63,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    }
+    
+    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+        // Store the deviceToken in the current installation and save it to Parse.
+        var currentInstallation : PFInstallation = PFInstallation.currentInstallation()
+        
+        currentInstallation.setDeviceTokenFromData(deviceToken)
+        currentInstallation.saveEventually()
+        
+        
     }
 
 
