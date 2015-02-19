@@ -3,6 +3,5 @@
 //
 
 #import <Parse/Parse.h>
-#import <AFNetworking/AFNetworking.h>
 #import <Alamofire/Alamofire.h>
 #import <FacebookSDK/FacebookSDK.h>

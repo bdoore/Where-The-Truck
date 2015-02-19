@@ -7,10 +7,11 @@
 //
 
 import UIKit
-//import Alamofire
-import Alamofire
+
 
 class DataSource: NSObject {
+    
+//    var query : PFQuery!
     
     class var sharedInstance: DataSource {
         
@@ -27,43 +28,35 @@ class DataSource: NSObject {
         return Static.instance!
     }
     
+    var truckArray : [FoodTruck] = []
     var serverURL : String = ""
    
     
     func getTruckData(){
         
+        var query : PFQuery = PFUser.query()
+        query.whereKey("isActive", equalTo: true)
+//        query = PFQuery(className: "foodTruck")
+        
+        query.findObjectsInBackgroundWithBlock { (objects : [AnyObject]!, error : NSError!) -> Void in
+            
+            if (error == nil){
+                println(objects.description)
+                self.truckArray = FoodTruck.initTrucks(objects as [PFObject])
+                
+                NSNotificationCenter.defaultCenter().postNotificationName("truckDataReceived", object: nil)
+            }
+            else{
+                println("\(error.localizedDescription)")
+            }
+            
+        }
+        
+//        println(query.valueForKey(truckName))
         
         
-//        let manager = AFHTTPRequestOperationManager()
-//        
-//        var params : [String : AnyObject] = ["group_id" : DataSource.sharedInstance.selectedGroup!.groupID, "group_members" : arrayToSend, "auth_token" : authToken()!, "user_id" : userID()!]
-//        
-//        manager.requestSerializer = AFJSONRequestSerializer() as AFJSONRequestSerializer
-//        manager.POST(serverURL+"groups/add_members.json",
-//            parameters: params,
-//            success: { (operation: AFHTTPRequestOperation!,responseObject: AnyObject!) in
-////                self.navigationItem.rightBarButtonItem?.enabled = true
-////                self.activityIndicator.stopAnimating()
-//                
-//                println("JSON: " + responseObject.description)
-//                if (responseObject.isKindOfClass(NSDictionary)){
-//                    var obj : NSDictionary = responseObject as NSDictionary
-//                    var created : Bool = obj.objectForKey("group_created") as Bool
-//                    if (created){
-//                        
-////                        GroupsDataSource.sharedInstance.parseDataFromStateDictionary(obj.objectForKey("state") as NSDictionary)
-//
-//                        
-//                    }
-//                }else if(responseObject.isKindOfClass(NSArray)){
-//                    
-//                }
-//            },
-//            failure: { (operation: AFHTTPRequestOperation!,error: NSError!) in
-//                
-//                
-//                println("Error: " + error.localizedDescription)
-//        })
+        
+
         
     }
     

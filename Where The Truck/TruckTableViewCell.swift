@@ -9,6 +9,14 @@
 import UIKit
 
 class TruckTableViewCell: UITableViewCell {
+    
+    
+    @IBOutlet weak var truckNameLabel: UILabel!
+    @IBOutlet weak var truckDescriptionLabel: UILabel!
+    @IBOutlet weak var distanceLabel: UILabel!
+    @IBOutlet weak var truckThumbnail: UIImageView!
+    
+    
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -20,5 +28,13 @@ class TruckTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+
+    }
+    
+    
 
 }
